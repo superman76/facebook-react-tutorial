@@ -2,16 +2,23 @@
 // 2) Render gravatar with email via prop;
 // 3) Have app render gravatar;
 // 4) Refactor app to render gravatar component;
+// 5) Show prop types as validation;
+// 6) Add key
+// 7) Pass in users as props
 
 var USERS = [
   { id: 1, name: 'Ryan Florence', email: 'notsure@react.com'},
   { id: 2, name: 'Doug Walter', email: 'douglaswalter2@gmail.com'},
   { id: 3, name: 'Someone Else', email: 'someone@else.com'}
-]
+];
 
-var G_URL = "http://gravatar.com/avatar"
+var G_URL = "http://gravatar.com/avatar";
 
 var Gravatar = React.createClass({
+  propTypes: {
+    email: React.PropTypes.string
+  },
+
   render: function(){
     var size = 36;
     var hash = md5(this.props.email);
@@ -25,8 +32,8 @@ var Gravatar = React.createClass({
 
 var App = React.createClass({
   render: function(){
-    var users = USERS.map(function(user){
-      return <li> <Gravatar email={user.email}/>{user.name}</li>
+    var users = this.props.users.map(function(user){
+      return <li key={user.id}> <Gravatar email={user.email}/>{user.name}</li>
     });
     return (
       <div>
@@ -37,4 +44,4 @@ var App = React.createClass({
   }
 })
 
-React.render(<App/>, document.getElementById('hello'));
+React.render(<App users={USERS}/>, document.getElementById('hello'));
