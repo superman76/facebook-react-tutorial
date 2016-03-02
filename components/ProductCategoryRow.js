@@ -1,9 +1,5 @@
 var ProductCategoryRow = React.createClass({
   render: function() {
-    return (
-      <div>
-        <h3> Product Category Row </h3>
-      </div>
-      )
+    return (<tr><th colSpan="2">{this.props.category}</th></tr>);
   }
 })
